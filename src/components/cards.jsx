@@ -19,8 +19,8 @@ export default function ComplexGrid({ theme }) {
     <Paper
       sx={{
         p: 0,
-        margin: 'auto',
-        width: '400px',
+        // margin: 'auto',
+        width: '500px',
         // flexGrow: 1,
         boxShadow: 'none',
         backgroundColor: `${theme.color}`,

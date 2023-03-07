@@ -26,7 +26,8 @@ import SaveIcon from '@mui/icons-material/Save'
 import CardItem from './components/cards'
 import Paper from '@mui/material/Paper'
 import Container from '@mui/material/Container'
-import { TextField, Stack } from '@mui/material'
+import { TextField, Stack, Card } from '@mui/material'
+import TablePagination from '@mui/material/TablePagination'
 import { styled } from '@mui/material/styles'
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,6 +42,17 @@ const drawerWidth = 240
 function ResponsiveDrawer(props) {
   const { window } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [page, setPage] = React.useState(2)
+  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage)
+  }
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -60,7 +72,7 @@ function ResponsiveDrawer(props) {
           style={{ objectFit: 'cover', margin: '3px auto' }}
           width="100px"
           height="100px"
-          src="https://firebasestorage.googleapis.com/v0/b/todo-app-e1dcf.appspot.com/o/download.png?alt=media&token=6d201900-c7d9-4532-a231-487a2aab0b2e"
+          src="https://firebasestorage.googleapis.com/v0/b/todo-app-e1dcf.appspot.com/o/logo.png?alt=media&token=cc0adc92-9177-48f9-9f93-379358f7d957"
         />
 
         <PermIdentityIcon
@@ -198,11 +210,31 @@ function ResponsiveDrawer(props) {
             width: '100%',
           }}
         >
-          <TextField
-            fullWidth
-            placeholder="What are you looking for?"
-            id="fullWidth"
-          />
+          <Card sx={{ marginTop: '20px' }}>
+            <div class="container text-center mt-3">
+              <div class="row row-cols-4">
+                <div class="col">
+                  {' '}
+                  <TextField
+                    fullWidth
+                    placeholder="What are you looking for?"
+                    id="fullWidth"
+                  />
+                </div>
+                <div class="col">Column</div>
+                <div class="col">Column</div>
+                <div class="col">Column</div>
+              </div>
+            </div>
+            <TablePagination
+              component="div"
+              count={626}
+              page={page}
+              onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Card>
         </Box>
       </Box>
     </Box>
